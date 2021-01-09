@@ -41,8 +41,29 @@ def create_parser():
   parser.add_argument('-p', '--pickle',
     action = 'store_true',
     default = False,
-    dest = 'make_network',
+    dest = 'save_network',
     help = 'Save winner network\'s pickle file'
+  )
+
+  parser.add_argument('-a', '--animate',
+    action = 'store_true',
+    default = False,
+    dest = 'animate',
+    help = 'Animate experiment running'
+  )
+
+  parser.add_argument('-d', '--draw',
+    action = 'store_true',
+    default = False,
+    dest = 'draw_network',
+    help = 'Draw network to file'
+  )
+
+  parser.add_argument('-s', '--save',
+    action = 'store_true',
+    default = False,
+    dest = 'save_results',
+    help = 'Save experiment results to files'
   )
 
   # ----- Shared Run Params -----
@@ -78,30 +99,30 @@ def create_parser():
     default = default_activation,
     type = str,
     dest = 'activation',
-    help = 'activation function to use (default {}, ignored in neat model)'.format(default_activation)
+    help = 'Activation function to use (default {}, ignored in neat model)'.format(default_activation)
   )
 
   # ----- ES_HYPERNEAT Run Params -----
   default_initial_depth = _DEFAULT_PARAMS['initial_depth']
   parser.add_argument('--initial_depth',
     default = default_initial_depth,
-    type = str,
+    type = int,
     dest = 'initial_depth',
-    help = ' (default {}, es_hyperneat model only)'.format(default_initial_depth)
+    help = 'Network initial depth (default {}, es_hyperneat model only)'.format(default_initial_depth)
   )
 
   default_max_depth = _DEFAULT_PARAMS['max_depth']
   parser.add_argument('--max_depth',
     default = default_max_depth,
-    type = str,
+    type = int,
     dest = 'max_depth',
-    help = ' (default {}, es_hyperneat model only)'.format(default_max_depth)
+    help = 'Network max depth (default {}, es_hyperneat model only)'.format(default_max_depth)
   )
 
   default_variance_threshold = _DEFAULT_PARAMS['variance_threshold']
   parser.add_argument('--variance_threshold',
     default = default_variance_threshold,
-    type = str,
+    type = float,
     dest = 'variance_threshold',
     help = ' (default {}, es_hyperneat model only)'.format(default_variance_threshold)
   )
@@ -109,7 +130,7 @@ def create_parser():
   default_band_threshold = _DEFAULT_PARAMS['band_threshold']
   parser.add_argument('--band_threshold',
     default = default_band_threshold,
-    type = str,
+    type = float,
     dest = 'band_threshold',
     help = ' (default {}, es_hyperneat model only)'.format(default_band_threshold)
   )
@@ -117,7 +138,7 @@ def create_parser():
   default_iteration_level = _DEFAULT_PARAMS['iteration_level']
   parser.add_argument('--iteration_level',
     default = default_iteration_level,
-    type = str,
+    type = int,
     dest = 'iteration_level',
     help = ' (default {}, es_hyperneat model only)'.format(default_iteration_level)
   )
@@ -125,7 +146,7 @@ def create_parser():
   default_division_threshold = _DEFAULT_PARAMS['division_threshold']
   parser.add_argument('--division_threshold',
     default = default_division_threshold,
-    type = str,
+    type = float,
     dest = 'division_threshold',
     help = ' (default {}, es_hyperneat model only)'.format(default_division_threshold)
   )
@@ -133,7 +154,7 @@ def create_parser():
   default_max_weight = _DEFAULT_PARAMS['max_weight']
   parser.add_argument('--max_weight',
     default = default_max_weight,
-    type = str,
+    type = float,
     dest = 'max_weight',
     help = ' (default {}, es_hyperneat model only)'.format(default_max_weight)
   )

@@ -22,8 +22,8 @@ class Model(object):
     env_kind: EnvKind,
     params: run.RunParams,
     output: bool = True,
-    make_network: bool = False,
-    config_file: str = None):
+    config_file: str = None,
+    animate: bool = False):
     if config_file is not None:
       _config_file = config_file
     else:
@@ -44,5 +44,5 @@ class Model(object):
       env_kind,
       params,
       output,
-      make_network
+      animate
     )

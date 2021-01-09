@@ -22,8 +22,9 @@ Currently, only **CartPole-v1** and **Acrobot-v1** environments are supported. S
 All configuration options can be found by running with the `--help` flag:
 
 ```
-usage: GymNEAT [-h] [-v] [-c CONFIG_FILE] [-p] [--generations GENS] [--max-steps MAX_STEPS] [--max-trials MAX_TRIALS] [-- ACTIVATION] [--initial_depth INITIAL_DEPTH] [--max_depth MAX_DEPTH]
-               [--variance_threshold VARIANCE_THRESHOLD] [--band_threshold BAND_THRESHOLD] [--iteration_level ITERATION_LEVEL] [--division_threshold DIVISION_THRESHOLD] [--max_weight MAX_WEIGHT]
+usage: GymNEAT [-h] [-v] [-c CONFIG_FILE] [-p] [-a] [-d] [-s] [--generations GENS] [--max-steps MAX_STEPS] [--max-trials MAX_TRIALS] [--activation ACTIVATION] [--initial_depth INITIAL_DEPTH]
+               [--max_depth MAX_DEPTH] [--variance_threshold VARIANCE_THRESHOLD] [--band_threshold BAND_THRESHOLD] [--iteration_level ITERATION_LEVEL] [--division_threshold DIVISION_THRESHOLD]
+               [--max_weight MAX_WEIGHT]
                {neat,hyperneat,es_hyperneat} {acrobot,cartpole}
 
 Run OpenAI Gym experiments using NEAT, HyperNEAT, and ES-HyperNEAT
@@ -36,13 +37,19 @@ positional arguments:
 
 optional arguments:
   -h, --help
-                        Show this help message and exit
+                        show this help message and exit
   -v, --verbose
                         Print output to stdout
   -c CONFIG_FILE, --config CONFIG_FILE
                         Path to custon config file
   -p, --pickle
                         Save winner network's pickle file
+  -a, --animate
+                        Animate experiment running
+  -d, --draw
+                        Draw network to file
+  -s, --save
+                        Save experiment results to files
   --generations GENS
                         Number of generations to run (default 500)
   --max-steps MAX_STEPS
@@ -52,9 +59,9 @@ optional arguments:
   --activation ACTIVATION
                         Activation function to use (default sigmoid, ignored in neat model)
   --initial_depth INITIAL_DEPTH
-                        (default 0, es_hyperneat model only)
+                        Network initial depth (default 0, es_hyperneat model only)
   --max_depth MAX_DEPTH
-                        (default 1, es_hyperneat model only)
+                        Network max depth (default 1, es_hyperneat model only)
   --variance_threshold VARIANCE_THRESHOLD
                         (default 0.03, es_hyperneat model only)
   --band_threshold BAND_THRESHOLD
@@ -66,6 +73,8 @@ optional arguments:
   --max_weight MAX_WEIGHT
                         (default 8.0, es_hyperneat model only)
 ```
+
+> NOTE: On recent MacOS distributions, OpenGL is not available. Therefore, piglet is not available and animating the experiment might fail.
 
 ## Credits
 

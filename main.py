@@ -1,3 +1,7 @@
+from pureples.shared.visualize import draw_net
+
+import pandas as pd
+
 from util.model import EnvKind, Model, ModelKind
 from util.parser import create_parser
 from util.run import RunParams
@@ -14,8 +18,11 @@ def main():
 
   # ----- Options -----
   output       = args.output
-  make_network = args.make_network
+  save_network = args.save_network
   config_file  = args.config_file
+  save_results = args.save_results
+  draw_network = args.draw_network
+  animate      = args.animate
 
   # ----- Get params -----
   generations        = args.gens
@@ -49,11 +56,24 @@ def main():
     env_kind,
     params,
     output,
-    make_network,
-    config_file
+    config_file,
+    animate
   )
 
-  stats_one, stats_ten, stats_hundred = stats
+  stats_one, stats_ten, stats_all = stats
+
+  # ----- Save Results -----
+  if save_results is not None and save_results:
+    stats_all.save()
+
+  # ----- Save Network -----
+  if save_network is not None and save_network:
+    # TODO: Save pickle if appropriate
+    pass
+
+  # ----- Draw Network -----
+  if draw_network is not None and draw_network:
+    draw_net(network, "network")
 
 if __name__ == '__main__':
   main()

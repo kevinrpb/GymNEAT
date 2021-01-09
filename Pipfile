@@ -13,8 +13,10 @@ pyglet      = { version = ">=1.4.0,<=1.5.0" }
 scipy       = { version = "~=1.5.4" }
 graphviz    = "*"
 matplotlib  = "*"
-pureples    = { editable = true, git = "https://github.com/ukuleleplayer/pureples.git" }
+# pureples    = { editable = true, git = "https://github.com/ukuleleplayer/pureples.git" }
+pureples    = { editable = true, git = "https://github.com/kevinrpb/pureples.git" }
 setuptools  = "*"
+pandas = "*"
 
 [dev-packages]
 

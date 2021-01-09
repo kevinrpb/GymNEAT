@@ -100,12 +100,12 @@ def neat(
   env_kind: EnvKind,
   params: RunParams,
   output: bool,
-  make_network: bool):
+  animate: bool):
   env = env_kind.get_env()
 
-  winner, stats = run_neat(params.generations, env, params.max_steps, config, params.max_trials, output)
+  winner, stats = run_neat(params.generations, env, params.max_steps, config, params.max_trials, output, animate)
 
-  network = FeedForwardNetwork.create(winner, config) if make_network else None
+  network = FeedForwardNetwork.create(winner, config)
 
   return winner, stats, network
 
@@ -114,14 +114,14 @@ def hyperneat(
   env_kind: EnvKind,
   params: RunParams,
   output: bool,
-  make_network: bool):
+  animate: bool):
   env = env_kind.get_env()
   substrate = get_substrate(ModelKind.HYPERNEAT, env_kind)
   activations = len(substrate.hidden_coordinates) + 2
 
-  winner, stats = run_hyper(params.generations, env, params.max_steps, config, substrate, activations, params.max_trials, params.activation, output)
+  winner, stats = run_hyper(params.generations, env, params.max_steps, config, substrate, activations, params.max_trials, params.activation, output, animate)
 
-  network = FeedForwardNetwork.create(winner, config) if make_network else None
+  network = FeedForwardNetwork.create(winner, config)
 
   return winner, stats, network
 
@@ -130,13 +130,13 @@ def es_hyperneat(
   env_kind: EnvKind,
   params: RunParams,
   output: bool,
-  make_network: bool):
+  animate: bool):
   env = env_kind.get_env()
   substrate = get_substrate(ModelKind.ES_HYPERNEAT, env_kind)
   _params = params.dict
 
-  winner, stats = run_es(params.generations, env, params.max_steps, config, _params, substrate, params.max_trials, output)
+  winner, stats = run_es(params.generations, env, params.max_steps, config, _params, substrate, params.max_trials, output, animate)
 
-  network = FeedForwardNetwork.create(winner, config) if make_network else None
+  network = FeedForwardNetwork.create(winner, config)
 
   return winner, stats, network
