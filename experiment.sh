@@ -6,7 +6,7 @@
 
 GENERATIONS="100"
 MAX_STEPS="100"
-MAX_TRIALS="100"
+MAX_TRIALS="50"
 ACTIVATION="sigmoid"
 INITIAL_DEPTH="0"
 MAX_DEPTH="1"
@@ -14,11 +14,23 @@ VARIANCE_THRESHOLD="0.03"
 BAND_THRESHOLD="0.3"
 ITERATION_LEVEL="1"
 DIVISION_THRESHOLD="0.5"
-MAX_WEIGHT="8.0"
 
 # --------------------
 # HELPER FUNCTION
 # --------------------
+
+reset() {
+  GENERATIONS="2"
+  MAX_STEPS="2"
+  MAX_TRIALS="2"
+  ACTIVATION="sigmoid"
+  INITIAL_DEPTH="0"
+  MAX_DEPTH="1"
+  VARIANCE_THRESHOLD="0.03"
+  BAND_THRESHOLD="0.3"
+  ITERATION_LEVEL="1"
+  DIVISION_THRESHOLD="0.5"
+}
 
 # $1: model
 # $2: env
@@ -54,8 +66,7 @@ run() {
     --band_threshold      $BAND_THRESHOLD \
     --iteration_level     $ITERATION_LEVEL \
     --division_threshold  $DIVISION_THRESHOLD \
-    --max_weight          $MAX_WEIGHT \
-    > $FILE_OUT
+    > $FILE_OUT 2>&1
 
   end=$(gdate +%s.%N)
   duration=$(echo "$end - $start" | bc)
@@ -87,21 +98,68 @@ run() {
 # ACROBOT
 # --------------------
 
+if [[ "Acrobot01" == $1 ]]; then
+  ##
+  EXP="Acrobot - Experiment 01 - NEAT - Default Settings"
+  ##
+  run "neat" "acrobot" "./out/acrobot.01" "$EXP"
+fi
+
+if [[ "Acrobot02" == $1 ]]; then
+##
+EXP="Acrobot - Experiment 02 - HyperNEAT - Default Settings"
+##
+run "hyperneat" "acrobot" "./out/acrobot.02" "$EXP"
+fi
+
+if [[ "Acrobot03" == $1 ]]; then
+##
+EXP="Acrobot - Experiment 03 - ES-HyperNEAT - Default Settings"
+##
+run "es_hyperneat" "acrobot" "./out/acrobot.03" "$EXP"
+fi
+
+if [[ "Acrobot04" == $1 ]]; then
+MAX_DEPTH="3"
+VARIANCE_THRESHOLD="0.01"
+##
+EXP="Acrobot - Experiment 04 - ES-HyperNEAT - Less Variance, More Depth"
+##
+run "es_hyperneat" "acrobot" "./out/acrobot.04" "$EXP"
+reset
+fi
+
 # --------------------
 # CARTPOLE
 # --------------------
 
+if [[ "Cartpole01" == $1 ]]; then
 ##
-EXP="Experiment 01 - Cartpole - NEAT - Default Settings"
+EXP="Cartpole - Experiment 01 - NEAT - Default Settings"
 ##
-run "neat" "cartpole" "./out/01.cartpole.neat" "$EXP"
+run "neat" "cartpole" "./out/cartpole.01" "$EXP"
+fi
 
+if [[ "Cartpole02" == $1 ]]; then
 ##
-EXP="Experiment 02 - Cartpole - HyperNEAT - Default Settings"
+EXP="Cartpole - Experiment 02 - HyperNEAT - Default Settings"
 ##
-run "hyperneat" "cartpole" "./out/02.cartpole.hyperneat" "$EXP"
+run "hyperneat" "cartpole" "./out/cartpole.02" "$EXP"
+fi
 
+if [[ "Cartpole03" == $1 ]]; then
 ##
-EXP="Experiment 03 - Cartpole - ES-HyperNEAT - Default Settings"
+EXP="Cartpole - Experiment 03 - ES-HyperNEAT - Default Settings"
 ##
-run "es_hyperneat" "cartpole" "./out/03.cartpole.es_hyperneat" "$EXP"
+run "es_hyperneat" "cartpole" "./out/cartpole.03" "$EXP"
+fi
+
+if [[ "Cartpole04" == $1 ]]; then
+# MAX_DEPTH="3"
+# VARIANCE_THRESHOLD="0.01"
+##
+EXP="Cartpole - Experiment 04 - ES-HyperNEAT - Less Variance, More Depth"
+##
+run "es_hyperneat" "cartpole" "./out/cartpole.04" "$EXP"
+reset
+fi
